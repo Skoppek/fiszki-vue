@@ -22,11 +22,11 @@ export default {
     },
     mounted() {
         this.loadUser()
-        this.url = `http://piec:5000/api/users/${this.$route.params.userId}/sets`
+        this.url = import.meta.env.VITE_BACKEND_URL + `/users/${this.$route.params.userId}/sets`
     },
     methods: {
         async loadUser() {
-            await axios.get(`http://piec:5000/api/users/${this.$route.params.userId}`)
+            await axios.get(import.meta.env.VITE_BACKEND_URL + `/users/${this.$route.params.userId}`)
                 .then((res) => {
                     this.user = res.data.user
                 })

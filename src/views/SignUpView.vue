@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         async signUp() {
-            await axios.post("http://piec:5000/api/users", {
+            await axios.post(import.meta.env.VITE_BACKEND_URL + "/users", {
                 name: this.name,
                 email: this.email,
                 password: this.password

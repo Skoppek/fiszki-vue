@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         load() {
-            axios.get('http://piec:5000/api/users/63bb3eb30ec30033603ceb0a/sets')
+            axios.get(import.meta.env.VITE_BACKEND_URL + "/users/63bb3eb30ec30033603ceb0a/sets")
                 .then((res) => {
                     this.sets = res.data
                 }).catch((err) => {

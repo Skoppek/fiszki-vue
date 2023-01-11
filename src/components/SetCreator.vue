@@ -30,7 +30,7 @@ export default {
             if (!this.name) {
                 return
             }
-            await axios.post(`http://piec:5000/api/sets`, {
+            await axios.post(import.meta.env.VITE_BACKEND_URL + "/sets", {
                 name: this.name,
                 desc: this.desc,
                 token: this.$cookies.get('token')

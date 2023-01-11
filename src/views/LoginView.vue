@@ -14,7 +14,6 @@
     </div>
 </template>
 
-
 <script>
 import axios from 'axios'
 export default {
@@ -28,7 +27,7 @@ export default {
     },
     methods: {
         async login() {
-            await axios.post("http://piec:5000/api/users/login", {
+            await axios.post(import.meta.env.VITE_BACKEND_URL + "/users/login", {
                 email: this.email,
                 password: this.password
             }, {
