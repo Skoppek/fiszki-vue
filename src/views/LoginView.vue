@@ -38,12 +38,11 @@ export default {
                 }
             }).then((response) => {
                 console.log(response)
-                this.$sessionStorage.set('fiszki-logged-user', response.data)
+                this.$sessionStorage.set('user-info', response.data)
                 this.$router.push({ name: 'user', params: { userId: response.data.id } })
                 this.$cookies.set('token', response.data.token)
             }).catch(error => {
                 console.log(error)
-                console.log("KURWAAAA")
                 this.warning = true
             })
         }

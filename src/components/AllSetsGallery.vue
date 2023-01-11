@@ -1,14 +1,11 @@
 <template>
-    <button @click="isOpen = true">New set</button>
-    <teleport to="body">
-        <SetCreator v-if="isOpen" @cancel="isOpen = false" @created="load()" />
-    </teleport>
+    <UserPanel />
     <SetCard v-for="set in sets" :set="set" />
 </template>
 
 <script>
 import SetCard from './SetCard.vue'
-import SetCreator from './SetCreator.vue'
+import UserPanel from './UserPanel.vue'
 import axios from 'axios'
 export default {
     data() {
@@ -19,15 +16,11 @@ export default {
     },
     components: {
         SetCard,
-        SetCreator
+        UserPanel
     },
     methods: {
         load() {
-            let url = import.meta.env.VITE_BACKEND_URL + 'sets'
-            if (this.$route.params.userId) {
-                url = import.meta.env.VITE_BACKEND_URL + `/users/${this.$route.params.userId}/sets`
-            }
-            axios.get(url)
+            axios.get(import.meta.env.VITE_BACKEND_URL + `/sets`)
                 .then((res) => {
                     this.sets = res.data
                 }).catch((err) => {

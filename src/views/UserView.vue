@@ -1,6 +1,6 @@
 <template>
-    <UserPanel :user="user" />
-    <SetGallery :url="this.url" />
+    <UserPanel />
+    <SetGallery />
 </template>
 
 <script>
@@ -17,12 +17,10 @@ export default {
     data() {
         return {
             user: {},
-            url: ""
         }
     },
     mounted() {
         this.loadUser()
-        this.url = import.meta.env.VITE_BACKEND_URL + `/users/${this.$route.params.userId}/sets`
     },
     methods: {
         async loadUser() {
