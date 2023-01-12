@@ -15,12 +15,8 @@
 </template>
 
 <script>
-import vueNiceScrollbar from "vue-nice-scrollbar";
 export default {
     name: "CardCard",
-    components: {
-        vueNiceScrollbar
-    },
     props: {
         card: Object
     }

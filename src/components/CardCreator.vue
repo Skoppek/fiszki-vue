@@ -62,7 +62,7 @@ export default {
             this.card.target.sentences.unshift(this.sentence)
         },
         async addCard() {
-            this.card.token = this.$cookies.get('token')
+            this.card.token = this.$cookies.get('loggedUser').token
             await axios.post(import.meta.env.VITE_BACKEND_URL + `/sets/${this.$route.params.setId}/cards`, this.card)
                 .then((response) => {
                     console.log(response)

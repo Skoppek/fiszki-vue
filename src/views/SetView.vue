@@ -1,5 +1,5 @@
 <template>
-    <button @click="creatorOpened = true">Add card</button>
+    <button v-if="showAdd" @click="creatorOpened = true">Add card</button>
     <teleport to="body">
         <CardCreator
             v-if="creatorOpened"
@@ -22,7 +22,8 @@ export default {
     data() {
         return {
             cards: [],
-            creatorOpened: false
+            creatorOpened: false,
+            showAdd: false
         }
     },
     async mounted() {
@@ -38,6 +39,14 @@ export default {
                 console.log(err)
             })
         }
+    },
+    beforeMount() {
+        axios.get(import.meta.env.VITE_BACKEND_URL + `/sets/${this.$route.params.setId}`)
+            .then((response) => {
+                this.showAdd = response.data.user === this.$cookies.get('loggedUser').user.id
+            }).catch((err) => {
+                console.log(err)
+            })
     }
 }
 </script>

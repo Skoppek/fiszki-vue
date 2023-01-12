@@ -10,8 +10,8 @@
             <input type="text" v-model="password" />
             <button v-on:click="signUp">SIGN UP</button>
         </div>
-        <div v-show="this.warning" class="warning">
-            <p>Email already taken</p>
+        <div v-show="this.warning.show" class="warning">
+            <p>{{ this.warning.message }}</p>
         </div>
     </div>
 </template>
@@ -25,7 +25,10 @@ export default {
             name: '',
             email: '',
             password: '',
-            warning: false
+            warning: {
+                message: '',
+                show: false
+            }
         }
     },
     methods: {
@@ -34,14 +37,30 @@ export default {
                 name: this.name,
                 email: this.email,
                 password: this.password
-            }).then((response) => {
-                this.$sessionStorage.set('user-info', response.data)
-                this.$router.push({ name: 'user', params: { userId: res.data._id } })
-                this.$cookies.set('token', response.body.token)
-            }).catch(error => {
-                this.warning = true
+            }).then((res) => {
+                console.log(res)
+                this.$cookies.set('loggedUser', res.data)
+                this.$router.push({ name: 'login'})
+            }).catch((err) => {
+                if (err.response.status == 409) {
+                    this.warning.message = 'Email already taken'
+                    this.warning.show = true
+                }
             })
+        },
+    },
+    beforeMount() {
+        // redirects if user is already logged
+        try {
+            if (this.$cookies.isKey('loggedUser')) {
+                this.$cookies.set('loggedUser', this.$cookies.get('loggedUser'))
+                this.$router.push({ name: 'user', params: { userId: this.$cookies.get('loggedUser').user.id } })
+            }
         }
+        catch {
+            console.log('Expired')
+        }
+
     }
 }
 </script>

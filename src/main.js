@@ -10,8 +10,7 @@ const app = createApp(App);
 app.use(router);
 app.use(VueCookies, {
   expires: "1d",
-  secure: true,
-  sameSite: "strict",
+  sameSite: "lax",
 });
 
 app.mount("#app");

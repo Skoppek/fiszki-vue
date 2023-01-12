@@ -32,7 +32,7 @@ export default {
             await axios.post(import.meta.env.VITE_BACKEND_URL + "/sets", {
                 name: this.name,
                 desc: this.desc,
-                token: this.$cookies.get('token')
+                token: this.$cookies.get('loggedUser').token
             }).then((res) => {
                 this.$emit('created')
                 this.$emit('cancel')
