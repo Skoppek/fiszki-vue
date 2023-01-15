@@ -3,9 +3,9 @@
         <h1>LOG IN</h1>
         <div class="inputs">
             <label>EMAIL</label>
-            <input type="text" v-model="email" />
+            <input type="email" v-model="email" />
             <label>PASSWORD</label>
-            <input type="text" v-model="password" />
+            <input type="password" v-model="password" />
             <button v-on:click="login">LOG IN</button>
         </div>
         <div v-show="this.warning.show" class="warning">

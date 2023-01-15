@@ -1,5 +1,4 @@
 <template>
-    <UserPanel />
     <SetCard v-for="set in sets" :set="set" />
 </template>
 

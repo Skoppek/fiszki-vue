@@ -1,8 +1,6 @@
 <template>
     <h1>{{ this.$cookies.get('loggedUser').user.name }}</h1>
-    <button @click="this.$router.push({ name: 'sets'})">Discover</button>
-    <button @click="this.$router.push({ name: 'user', params: { userId: this.$cookies.get('loggedUser').user.id } })">My flashcards</button>
-    <button @click="logout()">Log out</button>
+    <h3>{{ this.$cookies.get('loggedUser').user.email }}</h3>
 </template>
 
 <script>

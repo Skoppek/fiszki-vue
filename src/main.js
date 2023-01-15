@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import StoragePlugin from "vue-web-storage";
+// import StoragePlugin from "vue-web-storage";
 import router from "./router";
 import VueCookies from "vue-cookies";
 
@@ -14,7 +14,7 @@ app.use(VueCookies, {
 });
 
 app.mount("#app");
-app.use(StoragePlugin, {
-  prefix: "your_app_slug_", // default `app_`
-  drivers: ["session", "local"], // default 'local'
-});
+// app.use(StoragePlugin, {
+//   prefix: "your_app_slug_", // default `app_`
+//   drivers: ["session", "local"], // default 'local'
+// });

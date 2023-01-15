@@ -1,9 +1,11 @@
 <template>
+    <Menu :active="'UserView'"/>
     <UserPanel />
     <SetGallery />
 </template>
 
 <script>
+import Menu from '../components/Menu.vue'
 import UserPanel from '../components/UserPanel.vue'
 import SetGallery from '../components/SetGallery.vue'
 
@@ -12,7 +14,8 @@ export default {
     name: "UserView",
     components: {
         UserPanel,
-        SetGallery
+        SetGallery,
+        Menu
     },
     data() {
         return {

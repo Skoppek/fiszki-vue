@@ -5,7 +5,6 @@ import LoginView from "../views/LoginView.vue";
 import UserView from "../views/UserView.vue";
 import DiscoverView from "../views/DiscoverView.vue";
 import SetView from "../views/SetView.vue";
-// import LearnView from '../views/LearnView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
