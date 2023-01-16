@@ -1,37 +1,40 @@
 <template>
-    <div class="creator">
-        <div class="known input">
-            <input class="main"
-                :class="{warning: emptyKnown}"
-                type="text"
-                v-model="this.card.known.main"/>
-            <input class="secondary"
-                type="text"
-                v-model="this.card.known.secondary"/>
-        </div>
-        <div class="target input">
-            <input class="main"
-                :class="{warning: emptyTarget}"
-                type="text"
-                v-model="this.card.target.main"/>
-            <input class="secondary"
-                type="text"
-                v-model="this.card.target.secondary"/>
-            <input class="sentence-input"
-                type="text"
-                v-model="this.sentence"
-                @keyup.enter="addSentence()"/>
-            <div class="sentences"
-                v-for="(sentence, index) in this.card.target.sentences">
-                <input class="sentence"
+    <div>
+        <div class="inputs">
+            <div class="known input">
+                <input class="main"
+                    :class="{warning: emptyKnown}"
                     type="text"
-                    v-model="this.card.target.sentences[index]"/>
-                <button class="removeSentenceBtn"
-                    @click="this.card.target.sentences.splice(index, 1)">X</button>
+                    v-model="this.card.known.main"/>
+                <input class="secondary"
+                    type="text"
+                    v-model="this.card.known.secondary"/>
+            </div>
+            <div class="target input">
+                <input class="main"
+                    :class="{warning: emptyTarget}"
+                    type="text"
+                    v-model="this.card.target.main"/>
+                <input class="secondary"
+                    type="text"
+                    v-model="this.card.target.secondary"/>
+                <input class="sentence-input"
+                    type="text"
+                    v-model="this.sentence"
+                    @keyup.enter="addSentence()"/>
+                <div class="sentences"
+                    v-for="(sentence, index) in this.card.target.sentences">
+                    <input class="sentence"
+                        type="text"
+                        v-model="this.card.target.sentences[index]"/>
+                    <button class="removeSentenceBtn"
+                        @click="this.card.target.sentences.splice(index, 1)">X</button>
+                </div>
             </div>
         </div>
-        <button @click="addCard()">ADD</button>
-        <button @click="$emit('cancel')">CANCEL</button>
+        <button v-if="this.card" @click="updateCard()">DONE</button>
+        <button v-else @click="addCard()">ADD</button>
+        <button @click="$emit('close')">CANCEL</button>
     </div>
 </template>
 
@@ -39,6 +42,9 @@
 import axios from 'axios'
 export default {
     name: 'CardCreator',
+    props: {
+        readyCard: Object
+    },
     data() {
         return {
             card: {
@@ -57,11 +63,19 @@ export default {
             emptyTarget: false
         }
     },
+    created() {
+        if (this.readyCard) {
+            this.card = this.readyCard
+        }
+    },
     methods: {
         addSentence() {
             this.card.target.sentences.unshift(this.sentence)
         },
         async addCard() {
+            if (!this.checkCard()) {
+                return
+            }
             this.card.token = this.$cookies.get('loggedUser').token
             await axios.post(import.meta.env.VITE_BACKEND_URL + `/sets/${this.$route.params.setId}/cards`, this.card)
                 .then((response) => {
@@ -69,8 +83,24 @@ export default {
                 }).catch((err) => {
                     console.log(err)
                 })
-            this.$emit('created')
-            this.$emit('cancel')
+            this.$emit('added')
+            this.$emit('close')
+        },
+        async updateCard() {
+            if (!this.checkCard()) {
+                return
+            }
+            this.card.token = this.$cookies.get('loggedUser').token
+            await axios.put(import.meta.env.VITE_BACKEND_URL +
+                `/sets/${this.$route.params.setId}/cards/${this.card._id}`,
+                this.card )
+                .then((response) => {
+                    console.log(response)
+                }).catch((err) => {
+                    console.log(err)
+                })
+            this.$emit('added')
+            this.$emit('close')
         },
         checkCard() {
             if (this.card.known.main === '') {
@@ -85,28 +115,8 @@ export default {
         }
     },
     emits: [
-        'cancel',
-        'created'
+        'close',
+        'added'
     ]
 }
 </script>
-
-<style>
-.card-creator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.inputs {
-    background-color: #fff;
-    padding: 50px;
-    border: black 5px solid;
-}
-</style>
