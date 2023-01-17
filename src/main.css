@@ -1,0 +1,13 @@
+:root {
+    --first-color: #00072D;
+    --second-color: #001C55;
+    --third-color: #0A2472;
+    --fourth-color: #0E6BA8;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--first-color);
+    color:rgb(255, 255, 255);
+}

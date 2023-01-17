@@ -1,23 +1,30 @@
 <template>
-    <button v-if="showAdd" @click="isCardCreatorOpened = true">Add card</button>
-    <button @click="isLearning = true">Learn</button>
-    <teleport to="body">
-        <div class="modal" v-if="isCardCreatorOpened">
+    <Menu />
+    <div>
+        <button v-if="showAdd" @click="isCardCreatorOpened = true">Add card</button>
+        <button @click="startLearning()">Learn</button>
+        <teleport to="body">
+            <div class="modal" v-if="isCardCreatorOpened">
             <CardCreator
                 @close="isCardCreatorOpened = false"
                 @added="loadCards"
-            />
+                />
         </div>
-    </teleport>
-    <teleport to="body" >
-        <div class="modal" v-if="isLearning">
-            <Learn
+        </teleport>
+        <teleport to="body" >
+            <div class="modal" v-if="isLearning">
+                <Learn
                 :set="this.cards"
                 @close="isLearning = false"/>
-        </div>
-    </teleport>
-    <CardCard
-        v-for="card in this.cards" :card="card" :isOwner="true" @deleted="loadCards" />
+            </div>
+        </teleport>
+        <CardCard
+            v-for="card in this.cards"
+            :card="card"
+            :isOwner="this.showAdd"
+            @deleted="loadCards"
+        />
+    </div>
 </template>
 
 <script setup>
@@ -25,6 +32,7 @@ import axios from 'axios'
 import CardCard from '../components/CardCard.vue'
 import CardCreator from '../components/CardCreator.vue'
 import Learn from '../components/Learn.vue'
+import Menu from '../components/Menu.vue'
 </script>
 
 <script>
@@ -33,7 +41,8 @@ export default {
     components: {
         CardCard,
         CardCreator,
-        Learn
+        Learn,
+        Menu
     },
     data() {
         return {
@@ -56,6 +65,12 @@ export default {
                 console.log(err)
             })
         },
+        startLearning() {
+            if (this.cards.length === 0) {
+                return
+            }
+            this.isLearning = true
+        }
     },
     beforeMount() {
         axios.get(import.meta.env.VITE_BACKEND_URL + `/sets/${this.$route.params.setId}`)
