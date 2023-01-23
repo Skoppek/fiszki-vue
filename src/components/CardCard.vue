@@ -1,27 +1,35 @@
 <template>
-    <div class="card">
-        <div class="known">
-            <div class="main">{{ this.card.known.main }}</div>
-            <div class="secondary">{{ this.card.known.secondary }}</div>
-        </div>
-        <div class="target">
-            <div class="main">{{ this.card.target.main }}</div>
-            <div class="secondary">{{ this.card.target.secondary }}</div>
+    <div class="card-card">
+        <div class="island">
+            <div class="card">
+                <div class="known">
+                    <div class="main">{{ this.card.known.main }}</div>
+                    <div class="secondary">{{ this.card.known.secondary }}</div>
+                </div>
+                <div class="target">
+                    <div class="main">{{ this.card.target.main }}</div>
+                    <div class="secondary">{{ this.card.target.secondary }}</div>
+
+                </div>
+
+            </div>
             <div class="sentences">
                 <div class="sentence" v-for="sentence in card.target.sentences">{{ sentence }}</div>
             </div>
+            <div class="controls">
+                <button v-if="this.isOwner" @click="isUpdating = true">Edit</button>
+                <button v-if="this.isOwner" @click="deleteCard()">Delete</button>
+            </div>
         </div>
-        <button v-if="this.isOwner" @click="isUpdating = true">U</button>
-        <button v-if="this.isOwner" @click="deleteCard()">X</button>
-    </div>
-    <teleport to="body">
-        <div class="modal" v-if="isUpdating">
-            <CardCreator
+        <teleport to="body">
+            <div class="modal" v-if="isUpdating">
+                <CardCreator
                 :readyCard="this.card"
                 @close="isUpdating = false"
-            />
-        </div>
-    </teleport>
+                />
+            </div>
+        </teleport>
+    </div>
 </template>
 
 <script setup>
@@ -66,31 +74,5 @@ export default {
 </script>
 
 <style>
-.card {
-    display: grid;
-    grid-template-columns: auto auto 3rem;
-    grid-template-areas:
-    "known target options";
-    border: black solid 1px;
-    border-radius: 10px;
-    padding: 1rem;
-}
 
-.modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal > div {
-    background-color: #fff;
-    padding: 50px;
-    border: black 5px solid;
-}
 </style>

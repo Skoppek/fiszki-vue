@@ -1,7 +1,9 @@
 <template>
     <Menu :active="'UserView'"/>
-    <UserPanel />
-    <SetGallery />
+    <div class="content">
+        <UserPanel />
+        <SetGallery />
+    </div>
 </template>
 
 <script>

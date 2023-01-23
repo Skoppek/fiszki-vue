@@ -1,6 +1,8 @@
 <template>
     <Menu :active="'DiscoverView'"/>
-    <AllSetsGallery />
+    <div class="content">
+        <AllSetsGallery />
+    </div>
 </template>
 
 <script>

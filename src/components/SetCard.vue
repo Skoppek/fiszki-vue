@@ -1,9 +1,8 @@
 <template>
     <button class="set-card" @click="viewSet()">
-        <p>{{ this.set._id }}</p>
-        <h2>{{ this.set.name }}</h2>
-        <h4 v-if="this.set.user">{{ this.set.user.name }}</h4>
-        <p>{{ this.set.desc }}</p>
+        <div class="set-name">{{ this.set.name }}</div>
+        <div class="set-author" v-if="this.set.user">{{ this.set.user.name }}</div>
+        <div class="set-description">{{ this.set.desc }}</div>
     </button>
 </template>
 
@@ -21,8 +20,5 @@ export default {
 </script>
 
 <style>
-.set-card {
-    width: 20vw;
-    border: solid 2px black;
-}
+
 </style>

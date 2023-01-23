@@ -1,6 +1,6 @@
 <template>
-    <div class="credentials">
-        <h1>LOG IN</h1>
+    <div class="credentials island">
+        <h1>Log in</h1>
         <div class="inputs">
             <label>EMAIL</label>
             <input type="email" v-model="email" />
@@ -9,7 +9,7 @@
             <button v-on:click="login">LOG IN</button>
         </div>
         <div v-show="this.warning.show" class="warning">
-            <p>{{ this.warning.message }}</p>
+            {{ this.warning.message }}
         </div>
     </div>
 </template>
@@ -70,3 +70,7 @@ export default {
     }
 }
 </script>
+
+<style>
+
+</style>

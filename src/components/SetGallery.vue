@@ -3,7 +3,9 @@
     <teleport to="body">
         <SetCreator v-if="isOpen" @cancel="isOpen = false" @created="load()" />
     </teleport>
-    <SetCard v-for="set in sets" :set="set" />
+    <div class="set-cards">
+        <SetCard v-for="set in sets" :set="set" />
+    </div>
 </template>
 
 <script>

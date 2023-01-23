@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="learn">
         <div class="counter">{{ cardIndex }} / {{ shuffledSet.length }}</div>
         <div class="card" v-if="!isCompleted">
             <div class="known">
@@ -12,7 +12,7 @@
                     :class="{ shake: isWrong }"
                     @keyup.enter="tryWord"
                     v-model="guessWord">
-                <div v-else :class="{ correct: isCorrect}">
+                <div v-else :class="{ island: isCorrect}">
                     <Side :side="shuffledSet[cardIndex].target"/>
                     <button @click="loadNext">NEXT</button>
                 </div>
@@ -22,7 +22,9 @@
             <h3>You've scored:</h3>
             <h1>{{ numOfGuessed }} / {{ shuffledSet.length }}</h1>
         </div>
-        <button @click="$emit('close')">CANCEL</button>
+        <div class="controls">
+            <button @click="$emit('close')">Leave</button>
+        </div>
     </div>
 </template>
 

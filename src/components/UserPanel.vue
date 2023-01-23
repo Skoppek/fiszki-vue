@@ -1,6 +1,8 @@
 <template>
-    <h1>{{ this.$cookies.get('loggedUser').user.name }}</h1>
-    <h3>{{ this.$cookies.get('loggedUser').user.email }}</h3>
+    <div class="user-panel">
+        <div class="username">{{ this.$cookies.get('loggedUser').user.name }}</div>
+        <div class="email">{{ this.$cookies.get('loggedUser').user.email }}</div>
+    </div>
 </template>
 
 <script>

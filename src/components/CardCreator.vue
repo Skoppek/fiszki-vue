@@ -1,42 +1,52 @@
 <template>
-    <div>
+    <div class="card-creator">
         <div class="inputs">
-            <div class="known input">
+            <div class="known">
+                <label>Known word</label>
                 <input class="main"
                     :class="{warning: emptyKnown}"
                     type="text"
                     v-model="this.card.known.main"/>
+                <label>Known secondary</label>
                 <input class="secondary"
                     type="text"
                     v-model="this.card.known.secondary"/>
             </div>
-            <div class="target input">
+            <div class="target">
+                <label>Target word</label>
                 <input class="main"
                     :class="{warning: emptyTarget}"
                     type="text"
                     v-model="this.card.target.main"/>
+                <label>Target secondary</label>
                 <input class="secondary"
                     type="text"
                     v-model="this.card.target.secondary"/>
+            </div>
+
+        </div>
+        <div class="sentences">
+            <label>Examples</label>
+            <input class="sentence-input"
+                type="text"
+                v-model="this.sentence"
+                @keyup.enter="addSentence()"
+                :class="{shake: isFull}"/>
+            <div class="sentence"
+                v-for="(sentence, index) in this.card.target.sentences">
                 <input class="sentence-input"
                     type="text"
-                    v-model="this.sentence"
-                    @keyup.enter="addSentence()"
-                    :class="{shake: isFull}"/>
-                <div class="sentences"
-                    v-for="(sentence, index) in this.card.target.sentences">
-                    <input class="sentence"
-                        type="text"
-                        v-model="this.card.target.sentences[index]"
-                   />
-                    <button class="removeSentenceBtn"
-                        @click="this.card.target.sentences.splice(index, 1)">X</button>
-                </div>
+                    v-model="this.card.target.sentences[index]"
+                />
+                <button class="removeSentenceBtn"
+                    @click="this.card.target.sentences.splice(index, 1)">X</button>
             </div>
         </div>
-        <button v-if="this.readyCard" @click="updateCard()">DONE</button>
-        <button v-else @click="addCard()">ADD</button>
-        <button @click="$emit('close')">CANCEL</button>
+        <div class="controls">
+            <button v-if="this.readyCard" @click="updateCard()">DONE</button>
+            <button v-else @click="addCard()">ADD</button>
+            <button @click="$emit('close')">CANCEL</button>
+        </div>
     </div>
 </template>
 

@@ -27,5 +27,7 @@ export default {
 </template>
 
 <style>
-
+  #app {
+    width: 99vw;
+  }
 </style>

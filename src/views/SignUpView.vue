@@ -1,5 +1,5 @@
 <template>
-    <div class="credentials">
+    <div class="credentials island">
         <h1>Sign up</h1>
         <div class="inputs">
             <label>USERNAME</label>
@@ -66,5 +66,4 @@ export default {
 </script>
 
 <style>
-@import url(../main.css);
 </style>

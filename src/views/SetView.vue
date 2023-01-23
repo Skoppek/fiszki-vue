@@ -1,8 +1,10 @@
 <template>
     <Menu />
-    <div>
-        <button v-if="showAdd" @click="isCardCreatorOpened = true">Add card</button>
-        <button @click="startLearning()">Learn</button>
+    <div class="content">
+        <div class="set-btns">
+            <button v-if="showAdd" @click="isCardCreatorOpened = true">Add card</button>
+            <button @click="startLearning()">Learn</button>
+        </div>
         <teleport to="body">
             <div class="modal" v-if="isCardCreatorOpened">
             <CardCreator
@@ -18,12 +20,14 @@
                 @close="isLearning = false"/>
             </div>
         </teleport>
-        <CardCard
+        <div class="cards">
+            <CardCard
             v-for="card in this.cards"
             :card="card"
             :isOwner="this.showAdd"
             @deleted="loadCards"
-        />
+            />
+        </div>
     </div>
 </template>
 
@@ -96,9 +100,4 @@ export default {
     align-items: center;
 }
 
-.modal > div {
-    background-color: #fff;
-    padding: 50px;
-    border: black 5px solid;
-}
 </style>

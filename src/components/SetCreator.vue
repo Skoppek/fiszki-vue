@@ -1,12 +1,14 @@
 <template>
-    <div class="set-creator">
+    <div class="set-creator modal">
         <div class="inputs">
             <label>NAME</label>
             <input type="text" v-model="name" />
             <label>DECRIPTION</label>
             <textarea v-model="desc" rows="3"></textarea>
-            <button @click="createSet">CREATE</button>
-            <button @click="$emit('cancel')">CANCEL</button>
+            <div class="controls">
+                <button @click="createSet">CREATE</button>
+                <button @click="$emit('cancel')">CANCEL</button>
+            </div>
         </div>
     </div>
 </template>
@@ -43,23 +45,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.set-creator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.inputs {
-    background-color: #fff;
-    padding: 50px;
-    border: black 5px solid;
-}
-</style>

@@ -1,20 +1,264 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 :root {
-    --first-color: #00072D;
-    --second-color: #001C55;
-    --third-color: #0A2472;
-    --fourth-color: #0E6BA8;
-}
+    --main-color: #252e74;
+    --linear-from: #212968;
+    --linear-to: #28317c;
+    --left-shadow: #0f122e;
+    --right-shadow: #3b4aba;
 
-body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--first-color);
-    color:rgb(255, 255, 255);
+    color: rgb(176, 190, 253);
     font-family: 'Lato', sans-serif;
 }
 
-.card {
+body {
+    background-color: var(--main-color);
+    margin: 0;
+}
 
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal > div {
+    background-color: var(--main-color);
+    padding: 50px;
+    border-radius: 50px;
+    box-shadow: -17px -17px 23px var(--right-shadow);
+}
+
+.content {
+    width: min(90vw, 1200px);
+    background-color: var(--main-color);
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.island {
+    border-radius: 50px;
+    background: linear-gradient(145deg, var(--linear-from), var(--linear-to));
+    box-shadow:  17px 17px 23px var(--left-shadow),
+                -17px -17px 23px var(--right-shadow);
+    padding: 25px;
+}
+
+.credentials {
+    margin-top: 25vh;
+    width: min(90vw, 400px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, textarea {
+    font-size: 1.4rem;
+    padding: 0.6em;
+    color:rgb(176, 190, 253);
+    border-radius: 15px;
+    background: #252e74;
+    box-shadow: inset 7px 7px 14px #0f122e,
+                inset -7px -7px 14px #3b4aba;
+    border: none;
+    outline: none;
+}
+
+label {
+    margin: 0.5rem;
+}
+
+button {
+    color:rgb(176, 190, 253);
+    font-size: 1.5rem;
+    margin: 2rem 0 2rem 0;
+    padding: 1rem;
+    border-radius: 15px;
+    background: linear-gradient(145deg, var(--linear-to), var(--linear-from));
+    box-shadow:  7px 7px 14px var(--left-shadow),
+                -7px -7px 14px var(--right-shadow);
+    border: none;
+    outline: none;
+}
+
+button:active {
+    border-radius: 15px;
+    background: #252e74;
+    box-shadow: inset 7px 7px 14px #0f122e,
+                inset -7px -7px 14px #3b4aba;
+}
+
+.warning {
+    color: rgb(188, 198, 255);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.links {
+    padding: 1rem;
+    display: flex;
+}
+
+a {
+    color:rgb(188, 198, 255);
+    font-size: 2rem;
+    text-decoration: none;
+    border-radius: 15px;
+    background: linear-gradient(145deg, var(--linear-to), var(--linear-from));
+    box-shadow:  7px 7px 14px var(--left-shadow),
+             -7px -7px 14px var(--right-shadow);
+    border: none;
+    padding: 1rem 2rem 1rem 2rem;
+    margin: 1rem;
+}
+
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--right-shadow);
+}
+
+.menu > button {
+    padding: 1rem;
+    margin: 1rem;
+    margin-top: 0.5rem;
+}
+
+.user-panel {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.user-panel > .username {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.user-panel > .email {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2rem;
+}
+
+.set-cards, .cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.set-card {
+    width: 350px;
+    margin: 1rem;
+    margin-top: 2rem;
+}
+
+.set-card > .set-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.set-card > .set-author {
+    font-size: 1.2rem;
+}
+
+.set-card > .set-description {
+    font-size: 1.4rem;
+    border-radius: 15px;
+    background: #252e74;
+    box-shadow: inset 7px 7px 14px #0f122e,
+            inset -7px -7px 14px #3b4aba;
+    margin-top: .6rem;
+    padding: 15px;
+}
+
+.set-btns > button {
+    margin-right: 1rem;
+}
+
+.known, .target, .sentences{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-creator > .inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-creator > .inputs > input {
+    margin-right: .5rem;
+}
+
+.sentence > .sentence-input{
+    width: 86%;
+    margin-right: 0.5rem;
+}
+
+.sentence > button {
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.card-card {
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+.card {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.main {
+    height: 4rem;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.secondary {
+    font-size: 1.5rem;
+}
+
+.island > .sentences {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.learn {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
 }

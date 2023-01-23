@@ -1,5 +1,7 @@
 <template>
-    <SetCard v-for="set in sets" :set="set" />
+    <div class="set-cards">
+        <SetCard v-for="set in sets" :set="set" />
+    </div>
 </template>
 
 <script>
